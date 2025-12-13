@@ -65,3 +65,12 @@ if __name__ == "__main__":
         for riga in soluzioni[ese]:
             print(riga, end="")
         print("\n"+"-"*40)
+
+    with open(os.getcwd()+"/soluzioni.txt", "w", encoding="utf-8") as my_file:
+        for soluzione in soluzioni:
+            my_file.write(str(soluzione))
+            my_file.write("\n")
+
+
+    print(f"soluzione salvata in {os.getcwd()}\\soluzioni.txt")
+
