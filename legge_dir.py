@@ -60,17 +60,15 @@ if __name__ == "__main__":
 
     print(f"Nomi dei file nella directory {direct.percorso} ({len(lista)}):")
 
-    for ese in range(250, 254):
-        print(f"Esercizio {ese:03d}, {sezione[ese][2]}:")
-        for riga in soluzioni[ese]:
-            print(riga, end="")
-        print("\n"+"-"*40)
+    with open(os.getcwd()+"/mie_soluzioni.txt", "w", encoding="utf-8") as my_file:
+        y_pos =0
+        for y_pos in range(0, len(soluzioni)):
+            stringa = str(soluzioni[y_pos])
+            stringa = stringa[1:]
+            stringa = stringa[:-1]
+            stringa += "\n"
+            my_file.write(stringa)
+            y_pos += 1
 
-    with open(os.getcwd()+"/soluzioni.txt", "w", encoding="utf-8") as my_file:
-        for soluzione in soluzioni:
-            my_file.write(str(soluzione))
-            my_file.write("\n")
-
-
-    print(f"soluzione salvata in {os.getcwd()}\\soluzioni.txt")
+    print(f"soluzione salvata in {os.getcwd()}\\mie_soluzioni.txt")
 
