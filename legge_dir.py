@@ -1,5 +1,5 @@
 import os
-
+#editato su desktop studio
 class Percorsi:
 
     def __init__(self, percorso: str):
