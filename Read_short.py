@@ -1,30 +1,37 @@
 import os
 
-argomenti= []
-routine = []
+percorso = "C:/Users/saves/AppData/Local/tmc/vscode/mooc-programming-25"
+dire_list = []
+soluzioni = []
 
-percorso = os.getcwd()
-percorso += "/Allexercises.csv"
+# for directory in os.scandir(percorso):
+#     dire_list.append(directory.name)
 
-with open(percorso, "r") as my_file:
-    for line in my_file:
-        argomenti.append(line)
+# dire_list = dire_list[1:]
 
-for pos_y in range(0, len(argomenti)):
-    argomenti[pos_y] = argomenti[pos_y][:-1]
+start = True
+for directory in os.scandir(percorso):
+    if start == False:
+        subpercorso = percorso + "/" + directory.name + "/src"
+        #print(f"{subpercorso} : ", end="")
+        if directory.name != "web_programming":
+            for subdirectory in os.scandir(subpercorso):
+                #print(f"{subpercorso} {subdirectory.name}, ", end="")
+                if subdirectory.is_file():
+                    if str(subdirectory.name).split(".")[1] == "py":
+                        soluzione = ""
+                        #print(subpercorso + "/" + subdirectory.name)
+                        with open((subpercorso + "/" + subdirectory.name), "r") as my_file:
+                            #soluzione = my_file.readlines()
+                            for line in my_file:
+                                soluzione += my_file.readline() + "\n"
+
+            print(directory.name, len(soluzione))
+            soluzioni.append([directory.name, soluzione, len(soluzione)])
 
 
-percorso = os.getcwd()
-percorso += "/mie_soluzioni.txt"
-with open(percorso, "r") as my_file:
-    for line in my_file:
-        routine.append(line)
+    start = False
+with open("elenco.txt", "w", encoding="utf-8") as my_file:
+    my_file.write(str(soluzioni))
 
 
-percorso = os.getcwd()
-percorso += "/tutti.txt"
-with open(percorso, "w") as my_file:
-    pos_y = 0
-
-    for pos_y in range(0, len(routine)):
-        my_file.write(str(argomenti[pos_y] + ";" + str(routine[pos_y])))
