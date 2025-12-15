@@ -1,6 +1,6 @@
 import os
 
-percorso = "C:/Users/saves/AppData/Local/tmc/vscode/mooc-programming-25"
+percorso = "C:/Users/User/AppData/Local/tmc/vscode/mooc-programming-25"
 dire_list = []
 soluzioni = []
 
@@ -18,7 +18,8 @@ for directory in os.scandir(percorso):
             for subdirectory in os.scandir(subpercorso):
                 #print(f"{subpercorso} {subdirectory.name}, ", end="")
                 if subdirectory.is_file():
-                    if str(subdirectory.name).split(".")[1] == "py":
+                    print(subdirectory.name[-2:], end=" ")
+                    if str(subdirectory.name[-2:]) == "py":
                         soluzione = ""
                         #print(subpercorso + "/" + subdirectory.name)
                         with open((subpercorso + "/" + subdirectory.name), "r") as my_file:
@@ -32,6 +33,10 @@ for directory in os.scandir(percorso):
 
     start = False
 with open("elenco.txt", "w", encoding="utf-8") as my_file:
+    for esercizio in soluzioni:
+        my_file.write(f"{esercizio[0]}, {esercizio[1]} {esercizio[2]}\n")
+
+with open("matrice_elenco.txt", "w", encoding="utf-8") as my_file:
     my_file.write(str(soluzioni))
 
 
